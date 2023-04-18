@@ -1,0 +1,17 @@
+version: "3"
+services:
+  postgres_db:
+    image: postgres
+    container_name: postgres_yud_max
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "sequel"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_db:/data/db
+
+volumes:
+  postgres_db:
