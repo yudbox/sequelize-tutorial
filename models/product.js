@@ -1,13 +1,11 @@
-// https://sequelize.org/docs/v6/core-concepts/model-instances/
+const { PRODUCT } = require("./modelNames");
+
 const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
 
-const { sequelize } = require("../utils/database");
-const User = require("./user");
-const Cart = require("./cart");
-const CartItem = require("./cart-item");
-const { CART, CART_ITEM, USER } = require("./modelNames");
+// https://sequelize.org/docs/v6/core-concepts/model-instances/
 
-const Product = sequelize.define("product", {
+const Product = sequelize.define(PRODUCT, {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -28,23 +26,5 @@ const Product = sequelize.define("product", {
     allowNull: false,
   },
 });
-
-Product.associate = (models) => {
-  Product.belongsTo(models[USER], {
-    foreignKey: "userId",
-    targetKey: "id",
-  });
-
-  Product.belongsToMany(models[CART], {
-    foreignKey: "cartId",
-    through: models[CART_ITEM],
-  });
-};
-
-// https://sequelize.org/docs/v6/core-concepts/assocs/#one-to-many-relationships
-// Означает связь One-To-Many когда в модели Product появиться userId
-// Product.belongsTo(User, { constraints: false, onDelete: "CASCADE" });
-
-// Product.belongsToMany(Cart, { as: "Storage", through: CartItem });
 
 module.exports = Product;

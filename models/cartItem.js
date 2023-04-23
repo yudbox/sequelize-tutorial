@@ -1,8 +1,9 @@
-// https://sequelize.org/docs/v6/core-concepts/model-instances/
-const Sequelize = require("sequelize");
-const { sequelize } = require("../utils/database");
+const { CART_ITEM } = require("./modelNames");
 
-const CartItem = sequelize.define("cartItem", {
+const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
+
+const CartItem = sequelize.define(CART_ITEM, {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,

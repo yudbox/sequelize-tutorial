@@ -4,9 +4,9 @@ const _BOOKS = require("./books.json");
 const User = require("../user");
 const Product = require("../product");
 const Cart = require("../cart");
-const CartItem = require("../cart-item");
+const CartItem = require("../cartItem");
 const Order = require("../order");
-const OrderItem = require("../order-item");
+const OrderItem = require("../orderItem");
 
 const modelsList = {
   user: User,

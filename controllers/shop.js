@@ -1,5 +1,4 @@
 const Product = require("../models/product");
-const Order = require("../models/order");
 
 exports.getProducts = (req, res, next) => {
   Product.findAll()
@@ -69,6 +68,7 @@ exports.postCart = async (req, res, next) => {
     // то получаем количество сколько раз он (она - книга) была добавлена в корзину и
     // увеличиваем значение на один
     if (products.length) {
+      console.log("555555555555555555 products", products);
       const oldQuantity = products[0].cartItem.quantity;
       newQuantity = oldQuantity + 1;
 
@@ -81,6 +81,7 @@ exports.postCart = async (req, res, next) => {
     }
 
     Product.findByPk(prodId).then((product) => {
+      console.log("555555555555555555 product", product);
       userCart.addProduct(product, {
         through: { quantity: newQuantity },
       });
@@ -158,8 +159,9 @@ exports.getOrders = async (req, res, next) => {
   // т.к. user имеет ассоциацию с Product Product.belongsTo(User);
   // используем JOIN чтоб включить products в запрос
   // products это как таблица газвана в БД
+  console.log("4444444444444444 orders1", await req.user);
   const orders = await req.user.getOrders({ include: ["products"] });
-  console.log("4444444444444444 orders", orders);
+  console.log("4444444444444444 orders2", orders);
   res.render("shop/orders", {
     path: "/orders",
     pageTitle: "Your Orders",

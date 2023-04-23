@@ -1,28 +1,5 @@
 const Sequelize = require("sequelize");
 
-exports.models = (sequelize) => {
-  const { models } = sequelize;
-  console.log(
-    "3333333333333333333333333 models",
-    "associate" in models["cart"]
-  );
-
-  // feathersApp.setup = (...args) => {
-  // @ts-ignore
-  // const result = oldSetup.apply(this, args);
-
-  // Set up data relationships
-
-  Object.keys(models).forEach((name) => {
-    if ("associate" in models[name]) {
-      // @ts-ignore Property 'associate' does not exist on type 'ModelCtor<Model<any, any>>'
-      models[name].associate(models);
-    }
-  });
-  // return result;
-  // };
-};
-
 const dbName = process.env.POSTGRES_DB;
 const dbUser = process.env.POSTGRES_USER;
 const dbPassword = process.env.POSTGRES_PASSWORD;
@@ -36,4 +13,4 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   // logging: true,
 });
 
-exports.sequelize = sequelize;
+module.exports = sequelize;
