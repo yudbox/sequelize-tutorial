@@ -5,7 +5,9 @@
     "price": 245,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
     "description": "Very good book 1",
-    "userId": "6f17c7e2-3950-4441-8ac8-dcf83e67bf94"
+    "userId": "50b46776-b57b-42ce-8eb3-4ee7944f86aa",
+    "createdAt": "2023-03-31T07:39:24.518Z",
+    "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
     "id": "cc916026-d39c-4618-a009-52acad0f6464",
@@ -13,7 +15,9 @@
     "price": 24,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
     "description": "Very good book 2",
-    "userId": "6f17c7e2-3950-4441-8ac8-dcf83e67bf94"
+    "userId": "50b46776-b57b-42ce-8eb3-4ee7944f86aa",
+    "createdAt": "2023-03-31T07:39:24.518Z",
+    "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
     "id": "c773b3f5-9381-420c-ab86-3ed99a1030b0",
@@ -21,7 +25,9 @@
     "price": 277,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
     "description": "Very good book 3",
-    "userId": "6f17c7e2-3950-4441-8ac8-dcf83e67bf94"
+    "userId": "50b46776-b57b-42ce-8eb3-4ee7944f86aa",
+    "createdAt": "2023-03-31T07:39:24.518Z",
+    "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
     "id": "8d5216aa-ec54-4494-968c-286fe3714477",
@@ -29,6 +35,8 @@
     "price": 33,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
     "description": "Very good book 4",
-    "userId": "6f17c7e2-3950-4441-8ac8-dcf83e67bf94"
+    "userId": "50b46776-b57b-42ce-8eb3-4ee7944f86aa",
+    "createdAt": "2023-03-31T07:39:24.518Z",
+    "updatedAt": "2023-03-31T07:39:24.518Z"
   }
 ]

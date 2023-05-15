@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./app.js",
-    "start-server": "node app.js"
+    "start-server": "node app.js",
+    "db:create": "node db/scripts/dbCreate.js",
+    "db:sync": "node db/scripts/dbSync.js",
+    "db:migrate": "node db/scripts/dbMigrate.js",
+    "db:migrate:undo": "node db/scripts/dbMigrateUndo.js",
+    "db:fill": "node db/scripts/fillSeeds.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +26,7 @@
     "express": "^4.18.2",
     "mongoose": "^7.0.3",
     "pg": "^8.10.0",
-    "sequelize": "^6.30.0"
+    "sequelize": "^6.30.0",
+    "sequelize-cli": "^6.6.0"
   }
 }

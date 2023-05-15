@@ -1,7 +1,8 @@
-const Product = require("../models/product");
+const models = require("../db/models");
 
 exports.getProducts = (req, res, next) => {
-  Product.findAll()
+  models.product
+    .findAll()
     .then((products) => {
       res.render("shop/product-list", {
         prods: products,
@@ -15,7 +16,8 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
 
-  Product.findByPk(prodId)
+  models.product
+    .findByPk(prodId)
     .then((product) => {
       res.render("shop/product-detail", {
         product: product,
@@ -27,7 +29,8 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  Product.findAll()
+  models.product
+    .findAll()
     .then((products) => {
       res.render("shop/index", {
         prods: products,
@@ -39,6 +42,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+  console.log("555555555555555555555 req.user", req.user);
   req.user
     .getCart()
     .then((cart) => {
@@ -57,8 +61,10 @@ exports.postCart = async (req, res, next) => {
   const prodId = req.body.productId;
   let newQuantity = 1;
 
+  console.log("555555555555555555555 req.user", req.user);
   try {
     // находим корзину данного юзера
+
     const userCart = await req.user.getCart();
 
     // находим продукт(книгу) по id в данной корзине
@@ -68,7 +74,6 @@ exports.postCart = async (req, res, next) => {
     // то получаем количество сколько раз он (она - книга) была добавлена в корзину и
     // увеличиваем значение на один
     if (products.length) {
-      console.log("555555555555555555 products", products);
       const oldQuantity = products[0].cartItem.quantity;
       newQuantity = oldQuantity + 1;
 
@@ -80,8 +85,7 @@ exports.postCart = async (req, res, next) => {
       return res.redirect("/cart");
     }
 
-    Product.findByPk(prodId).then((product) => {
-      console.log("555555555555555555 product", product);
+    models.product.findByPk(prodId).then((product) => {
       userCart.addProduct(product, {
         through: { quantity: newQuantity },
       });
@@ -94,6 +98,7 @@ exports.postCart = async (req, res, next) => {
 
 exports.postCartDeleteProduct = async (req, res, next) => {
   const prodId = req.body.productId;
+  console.log("555555555555555555555 req.user", req.user);
   try {
     const userCart = await req.user.getCart();
     const products = await userCart.getProducts({ where: { id: prodId } });
@@ -106,13 +111,13 @@ exports.postCartDeleteProduct = async (req, res, next) => {
 };
 
 exports.postOrder = async (req, res, next) => {
+  console.log("555555555555555555555 req.user", req.user);
   try {
     const cart = await req.user.getCart();
     const products = await cart.getProducts();
     const order = await req.user.createOrder();
     await order.addProducts(
       products.map((product) => {
-        console.log("44444444444444 product", product);
         // {
         //   dataValues: {
         //     id: '404ea463-996b-49f9-8c1b-ad29b139ac17',
@@ -138,7 +143,7 @@ exports.postOrder = async (req, res, next) => {
         //     },
         //   }
         // }
-        // добавляем в заказ Product (книгу) с количеством которае указано в cartItem модели
+        // добавляем в заказ   models.product (книгу) с количеством которае указано в cartItem модели
         // для этого в orderItem обект который привязан через Order.belongsToMany(Product, { through: OrderItem });
         // добавляем св-во quantity которое равно quantity в cartItem модели
         product.orderItem = { quantity: product.cartItem.quantity };

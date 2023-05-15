@@ -1,111 +1,86 @@
+require("./lib/core/additionalInit");
 require("dotenv").config();
-const mongoose = require("mongoose");
 
-const express = require("express");
+const createApp = require("./lib/core/createApp");
+const createServer = require("./lib/core/createServer");
 
-const sequelize = require("./utils/database");
-const seed = require("./models/seeds");
-const middlaware = require("./middleware/middleware");
+// const mongoose = require("mongoose");
 
-const User = require("./models/user");
-const Product = require("./models/product");
-const Cart = require("./models/cart");
-const Order = require("./models/order");
-const OrderItem = require("./models/orderItem");
-const CartItem = require("./models/cartItem");
+// const express = require("express");
 
-const PORT = process.env.PORT || 4000;
-const app = express();
+// const sequelize = require("./utils/database");
+// const seed = require("./models/seeds");
+// const middlaware = require("./middleware/middleware");
 
-middlaware(app, express);
+// const User = require("./models/user");
+// const Product = require("./models/product");
+// const Cart = require("./models/cart");
+// const Order = require("./models/order");
+// const OrderItem = require("./models/orderItem");
+// const CartItem = require("./models/cartItem");
 
-// setup the routes
-require("./routes")(app);
+const app = createApp();
+const server = createServer(app);
 
-// комбинирование этих дву параметров создает 3 типа связей, в данном случае One-To-Many
-User.hasMany(Product);
-// взаимозаменяемые записи
-User.hasOne(Cart);
-// но  User может принадлежать много заказов
-User.hasMany(Order);
+server.run().catch((ex) => {
+  console.error(__filename, "Error:", ex);
+});
 
-// https://sequelize.org/docs/v6/core-concepts/assocs/#one-to-many-relationships
-// Означает связь One-To-Many когда в модели Product появиться userId
-Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+// console.log(
+//   "---------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>"
+// );
 
-Product.belongsToMany(Cart, { through: CartItem });
+// const start = async () => {
+//   const mongoUser = process.env.MONGODB_USER;
+//   const mongoPassword = process.env.MONGODB_PASSWORD;
 
-// Означает связь One-To-One когда в модели Cart появиться userId
-Cart.belongsTo(User);
+//   /*
+//   CONNECTING TO MONGO
 
-// Означает связь Many-To-Many когда в Cart(корзине) может быть много продуктов
-// и Product может содержаться в нескольких Cart(корзинах)
-// и эти связи будут содержаться в модели CartItem,
-// в которой к cartId будет привязано несколько productId и наоборот
-// CartItem что-то вроде мидлвара (table in between) которая связывает две таблицы
-Cart.belongsToMany(Product, { through: CartItem });
+//   */
+//   try {
+//     await mongoose.connect(
+//       `mongodb+srv://${mongoUser}:${mongoPassword}@sequeldb.rmjnawi.mongodb.net/?retryWrites=true&w=majority`
+//     );
+//     // console.log("111111111111 mongoose connected ");
+//   } catch (error) {
+//     console.log("database error ", error);
+//   }
 
-// Означает связь One-To-Many когда в модели Order появиться userId
-// означает что заказ может принадлежать только одному User
-Order.belongsTo(User);
+//   /*
+//   CONNECTING TO SQL
 
-// создаст промежуточную таблицу OrderItem по которому у заказа (Order) может быть много Product (книг)
-Order.belongsToMany(Product, { through: OrderItem });
+//   */
 
-console.log(
-  "---------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>"
-);
-const start = async () => {
-  const mongoUser = process.env.MONGODB_USER;
-  const mongoPassword = process.env.MONGODB_PASSWORD;
+//   try {
+//     const sequelizeConnection = await sequelize.sync();
+//     // .sync({ force: true });
 
-  /*
-  CONNECTING TO MONGO  
-  
-  */
-  try {
-    await mongoose.connect(
-      `mongodb+srv://${mongoUser}:${mongoPassword}@sequeldb.rmjnawi.mongodb.net/?retryWrites=true&w=majority`
-    );
-    // console.log("111111111111 mongoose connected ");
-  } catch (error) {
-    console.log("database error ", error);
-  }
+//     await seed(sequelizeConnection.models).insert();
 
-  /*
-  CONNECTING TO SQL  
-  
-  */
+//     console.log(
+//       "database  connected at port:",
+//       sequelizeConnection.config.port
+//     );
 
-  try {
-    const sequelizeConnection = await sequelize.sync();
-    // .sync({ force: true });
+//     let user = await User.findAll();
 
-    await seed(sequelizeConnection.models).insert();
+//     if (!user[0]) {
+//       console.log("1111111111111111 root user just created");
+//       user = await User.create({ name: "Alex", email: "alex@gmail.com" });
+//       // console.log("1111111111111111 root user1 = ", user);
+//       await user.createCart();
+//     } else {
+//       // console.log("1111111111111111 root user2 = ", user);
+//       await user[0].createCart();
+//     }
+//   } catch (error) {
+//     console.log("database error ", error);
+//   }
 
-    console.log(
-      "database  connected at port:",
-      sequelizeConnection.config.port
-    );
+//   app.listen(PORT, () =>
+//     console.log(`11111111111 server started at port: ${PORT}`)
+//   );
+// };
 
-    let user = await User.findAll();
-
-    if (!user[0]) {
-      console.log("1111111111111111 root user just created");
-      user = await User.create({ name: "Alex", email: "alex@gmail.com" });
-      // console.log("1111111111111111 root user1 = ", user);
-      await user.createCart();
-    } else {
-      // console.log("1111111111111111 root user2 = ", user);
-      await user[0].createCart();
-    }
-  } catch (error) {
-    console.log("database error ", error);
-  }
-
-  app.listen(PORT, () =>
-    console.log(`11111111111 server started at port: ${PORT}`)
-  );
-};
-
-start();
+// start();
