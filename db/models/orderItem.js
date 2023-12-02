@@ -5,7 +5,7 @@ const { ORDER_ITEM } = require("../../lib/constants").MODEL_NAMES;
 
 module.exports = (sequelize, dataTypes) => {
   const Model = sequelize.define(ORDER_ITEM, {
-    id: {
+    orderItemId: {
       type: dataTypes.UUID,
       primaryKey: true,
       defaultValue: dataTypes.UUIDV4,

@@ -6,7 +6,7 @@ const { PRODUCT, USER, CART, CART_ITEM } =
 
 module.exports = (sequelize, dataTypes) => {
   const Model = sequelize.define(PRODUCT, {
-    id: {
+    productId: {
       type: dataTypes.UUID,
       primaryKey: true,
       defaultValue: dataTypes.UUIDV4,
@@ -25,6 +25,14 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.STRING,
       allowNull: false,
     },
+    // userId: {
+    //   type: dataTypes.UUID,
+    //   allowNull: true,
+    //   references: {
+    //     model: "user",
+    //     key: "id",
+    //   },
+    // },
     createdAt: {
       type: dataTypes.DATE,
       allowNull: false,

@@ -6,7 +6,7 @@ const { ORDER, USER, PRODUCT, ORDER_ITEM } =
 
 module.exports = (sequelize, dataTypes) => {
   const Model = sequelize.define(ORDER, {
-    id: {
+    orderId: {
       type: dataTypes.UUID,
       primaryKey: true,
       defaultValue: dataTypes.UUIDV4,

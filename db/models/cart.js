@@ -4,7 +4,7 @@ const { CART, USER, PRODUCT, CART_ITEM } =
 
 module.exports = (sequelize, dataTypes) => {
   const Model = sequelize.define(CART, {
-    id: {
+    cartId: {
       type: dataTypes.UUID,
       primaryKey: true,
       defaultValue: dataTypes.UUIDV4,

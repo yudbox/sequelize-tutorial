@@ -1,6 +1,6 @@
 [
   {
-    "id": "baf34bcf-6c17-4676-8d00-4e3db398e36f",
+    "productId": "baf34bcf-6c17-4676-8d00-4e3db398e36f",
     "title": "Book 1",
     "price": 245,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
@@ -10,7 +10,7 @@
     "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
-    "id": "cc916026-d39c-4618-a009-52acad0f6464",
+    "productId": "cc916026-d39c-4618-a009-52acad0f6464",
     "title": "Book 2",
     "price": 24,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
@@ -20,7 +20,7 @@
     "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
-    "id": "c773b3f5-9381-420c-ab86-3ed99a1030b0",
+    "productId": "c773b3f5-9381-420c-ab86-3ed99a1030b0",
     "title": "Book 3",
     "price": 277,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
@@ -30,7 +30,7 @@
     "updatedAt": "2023-03-31T07:39:24.518Z"
   },
   {
-    "id": "8d5216aa-ec54-4494-968c-286fe3714477",
+    "productId": "8d5216aa-ec54-4494-968c-286fe3714477",
     "title": "Book 4",
     "price": 33,
     "imageUrl": "https://dictionary.cambridge.org/images/full/book_noun_001_01679.jpg?version=5.0.310",
